@@ -1,0 +1,31 @@
+#include <iostream>
+#include <bitset>
+#include <cstdlib>
+#include <Windows.h>
+#include <fstream>
+#include <vector>
+#include <chrono>
+
+using namespace std;
+
+int main() {
+
+    setlocale(LC_ALL, "Russian");
+    //Задание 1_в
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    unsigned int x1 = 25;
+    const int n = sizeof(int) * 8; //=32 количество разрядов в числе типа int 
+    unsigned maskan = (1 << (n- 1)); //1 в старшем бите 32-разрядной сетки 
+    cout << "Начальный вид маски: " << bitset<n>(maskan) << endl; cout << "Результат: " << endl;
+    for (int i = 1; i <= n; i++) { //32 раза по количеству разрядов:
+        cout << ((x1 & maskan) >> (n - i)); 
+        maskan = maskan >> 1; //смещение 1 в маске на разряд влево
+    } 
+    cout << endl;
+    system("pause"); 
+
+    return 0;
+}
+
+
