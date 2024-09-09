@@ -1,0 +1,22 @@
+#include <iostream>
+#include <bitset>
+#include <cstdlib>
+#include <Windows.h>
+#include <fstream>
+#include <vector>
+#include <chrono>
+
+using namespace std;
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    //Задание_1_а
+    unsigned char x = 255; //1  127 128 //8-разрядное двоичное число 11111111
+    unsigned char maska = 1; //1=00000001 – 8-разрядная маска
+    x = x & (~(maska << 4)); //результат x=239
+    cout << static_cast<int>(x) << endl; //" (в двоичном виде: " << std::bitset<8>(x) << ")\n";
+    
+    return 0;
+}
+
+
