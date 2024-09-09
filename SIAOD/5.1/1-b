@@ -1,0 +1,21 @@
+#include <iostream>
+#include <bitset>
+#include <cstdlib>
+#include <Windows.h>
+#include <fstream>
+#include <vector>
+#include <chrono>
+
+using namespace std;
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    //Задание_1_б
+    unsigned char y = 255; // число
+    unsigned char mask = 1; // 00000001
+    y = y | (mask << 6); // Установка 7-го бита в 1
+    cout << static_cast<int>(y) << endl;
+    return 0;
+}
+
+
