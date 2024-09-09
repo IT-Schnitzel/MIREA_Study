@@ -1,0 +1,65 @@
+#include <iostream>
+#include <bitset>
+#include <cstdlib>
+#include <Windows.h>
+#include <fstream>
+#include <vector>
+#include <chrono>
+
+using namespace std;
+
+void setBit(vector<unsigned char>& bitArray, int number) {
+    bitArray[number / 8] |= (1 << (number % 8));
+}
+
+// Функция для проверки, установлен ли бит
+bool isBitSet(const vector<unsigned char>& bitArray, int number) {
+    return (bitArray[number / 8] & (1 << (number % 8))) != 0;
+}
+
+int main() {
+
+    setlocale(LC_ALL, "Russian");
+    cout << "T3" << endl;
+    //Задание 3
+    const int MAX_NUMBERS = 10000000;
+    const int BIT_ARRAY_BYTES = (MAX_NUMBERS + 7) / 8;
+    vector<unsigned char> bitArray(BIT_ARRAY_BYTES, 0); // Инициализируем битовый массив нулями
+    auto startTime = chrono::high_resolution_clock::now();     // Начинаем отсчет времени выполнения
+    ifstream inputFile("unique_numbers.txt");     // Открываем входной файл для чтения
+    if (!inputFile) {
+        cerr << "Ошибка: не удалось открыть входной файл!" << endl;
+        return 1;
+    }
+    int number;
+    while (inputFile >> number) {
+        // Проверяем, что число находится в допустимом диапазоне
+        if (number >= 0 && number < MAX_NUMBERS) {
+            setBit(bitArray, number);  // Устанавливаем бит в массиве
+        }
+    }
+    inputFile.close();  // Закрываем файл после чтения
+    ofstream outputFile("output.txt"); // Открываем выходной файл для записи
+    if (!outputFile) { 
+        cerr << "Ошибка: не удалось создать выходной файл!" << endl;
+        return 1;
+    }
+    
+    for (int i = 0; i < MAX_NUMBERS; ++i) { // Записываем отсортированные числа в выходной файл
+        if (isBitSet(bitArray, i)) {
+            outputFile << i << endl;
+        }
+    }
+    outputFile.close();  // Закрываем файл после записи
+    // Завершаем отсчет времени выполнения
+    auto endTime = chrono::high_resolution_clock::now();
+    chrono::duration<double> elapsedTime = endTime - startTime;
+
+    // Выводим результаты
+    cout << "Время работы программы: " << elapsedTime.count() << " секунд" << endl;
+    cout << "Объем памяти для битового массива: " << sizeof(unsigned char) * BIT_ARRAY_BYTES << " байт" << endl;
+
+    return 0;
+}
+
+
