@@ -1,0 +1,18 @@
+#!/usr/bin/python3.8
+ 
+ 
+import re
+def extract_identifiers(filename):
+    identifier_pattern = r'\b[a-zA-Z_]\w*\b'
+    identifiers = set()
+    with open(filename, 'r') as file:
+        for line in file:
+            found_identifiers = re.findall(identifier_pattern, line)
+            identifiers.update(found_identifiers)
+    return identifiers
+def main():
+    filename = 'py'
+    identifiers = extract_identifiers(filename)
+    for identifier in sorted(identifiers): print(identifier)
+if __name__ == "__main__":
+    main()
