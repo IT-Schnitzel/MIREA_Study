@@ -1,0 +1,22 @@
+package vehicles;
+
+import lombok.Getter;
+import lombok.Setter;
+@Getter
+@Setter
+public class ElectricCar extends Car {
+    private int batteryCapacity;
+
+    public ElectricCar(String model, String license, String color, int year, String ownerName, String insuranceNumber, int batteryCapacity, String engineType) {
+        super(model, license, color, year, ownerName, insuranceNumber, engineType);
+        this.batteryCapacity = batteryCapacity;
+        this.engineType = "Electric";
+    }
+
+
+    @Override
+    public String toString() {
+        return "ElectricCar: model='" + getModel() + "', license='" + getLicense() + "', color='" + getColor() + "', year=" + getYear() +
+                ", ownerName='" + getOwnerName() + "', insuranceNumber='" + getInsuranceNumber() + "', engineType='" + engineType + "', batteryCapacity=" + batteryCapacity;
+    }
+}
