@@ -1,0 +1,25 @@
+package vehicles;
+
+import lombok.*;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class Car {
+    private String model;
+    private String license;
+    private String color;
+    private int year;
+    private String ownerName;
+    private String insuranceNumber;
+    protected String engineType;
+    public Car(String model, String license) {
+        this.model = model;
+        this.license = license;
+    }
+
+    public String To_String() {
+        return "Car:" + "model='" + model + ", license='" + license  + ", color='" + color  + ", year=" + year;
+    }
+}
